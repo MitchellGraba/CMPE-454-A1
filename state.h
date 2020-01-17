@@ -38,9 +38,9 @@ private:
   mat4 M;                     // world-to-window transform
   float currentTime;          // current game time
   float timeOfIncomingFlight; // time taken for incoming missile to reach bottom
-  float lastMissile = 0;
-  int rate = 4;
-  int count = 0;
+  float lastMissile = 0;      //time last incomimg missile was sent
+  float rate = 4.0;           // how many seconds per incoming missile
+  int count = 0;              
 
   seq<Silo> silos;
   seq<City> cities;

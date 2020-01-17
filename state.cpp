@@ -50,7 +50,7 @@ void State::updateState(float deltaT)
 
   // Generate some new missiles.  The rate of missile generation
   // should increase with time.
-  
+
   bool newMissile = false;
 
   if ((currentTime - lastMissile) > rate)
@@ -63,6 +63,11 @@ void State::updateState(float deltaT)
   {
     rate--;
     count = 0;
+  }
+  else if (count > 10 && rate > 0.4)
+  {
+    count = 0;
+    rate -= 0.1;
   }
 
   if (newMissile)
@@ -102,7 +107,7 @@ void State::updateState(float deltaT)
     std::cout << " y: " << randYvec << std::endl;
 
     missilesIn.add(Missile(vec3(randXsrc, worldTop, 0),                                         // source
-                           0.4 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
+                           0.3 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
                            0,                                                                   // destination y
                            vec3(1, 1, 0)));                                                     // colour
   }
