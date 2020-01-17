@@ -59,9 +59,28 @@ void State::updateState( float deltaT )
   // CHANGE THIS
 
   if (randIn01() > 0.99) {	// New missile 
+    
+    float randXsrc = randIn01();
+    std:: cout << "SOURCE X: " << randXsrc << std::endl;
 
-    missilesIn.add( Missile( vec3( randIn01(), worldTop, 0), // source
-			     vec3( -0.02, -0.1, 0 ),         // velocity
+    float yGenBound1 = worldTop / (randXsrc) ; //slopes
+    float yGenBound2 = -worldTop / (1 - randXsrc);
+    
+    float randXvec = randIn01();
+    
+    float randYvec = 0;
+    
+    if (randXvec < randXsrc){
+      randYvec = yGenBound1 * randXvec * randIn01();
+    } else if (randXvec > randXsrc){
+      randYvec = (yGenBound2 * (randXvec - randXsrc) + worldTop) * randIn01();
+    }
+    std:: cout << "x: " << randXvec;
+    std:: cout << " y: " << randYvec << std::endl;
+    //0.67 / -(randXsrc) ;
+
+    missilesIn.add( Missile( vec3( randXsrc, worldTop, 0), // source
+			     0.4 * vec3( randXvec - randXsrc, randYvec - worldTop, 0 ).normalize(),         // velocity
 			     0,                              // destination y
 			     vec3( 1,1,0 ) ) );              // colour
   }
@@ -71,6 +90,8 @@ void State::updateState( float deltaT )
   for (i=0; i<missilesIn.size(); i++)
     if (missilesIn[i].hasReachedDestination()) {
       // CHANGE THIS: ADD AN EXPLOSION
+
+      //explosions.add(new Circle(vec3 p, float s, float maxRad, vec3 c));
       missilesIn.remove(i);
       i--;
     }
