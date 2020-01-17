@@ -1,9 +1,7 @@
-// The state 
-
+// The state
 
 #ifndef STATE_H
 #define STATE_H
-
 
 #include "gpuProgram.h"
 #include "linalg.h"
@@ -14,33 +12,35 @@
 #include "city.h"
 #include "circle.h"
 
+class State
+{
 
-class State {
+public:
+  State(float l, float r, float b, float t)
+  {
 
- public:
-
-  State( float l, float r, float b, float t ) {
-
-    gpuProgram = new GPUProgram( "a1.vert", "a1.frag" );
+    gpuProgram = new GPUProgram("a1.vert", "a1.frag");
     worldTop = t;
-    M = ortho( l, r, b, t, -1, 1 ); // use orthographic projection with l,r,t,b at window edges
+    M = ortho(l, r, b, t, -1, 1); // use orthographic projection with l,r,t,b at window edges
 
     setupWorld();
   }
 
   void setupWorld();
   void draw();
-  void fireMissile( int siloIndex, float x, float y );
-  void updateState( float deltaT );
+  void fireMissile(int siloIndex, float x, float y);
+  void updateState(float deltaT);
 
- private:
-
+private:
   GPUProgram *gpuProgram;
 
-  float worldTop;               // world coord at top of screen
-  mat4  M;                      // world-to-window transform
-  float currentTime;            // current game time
-  float timeOfIncomingFlight;   // time taken for incoming missile to reach bottom
+  float worldTop;             // world coord at top of screen
+  mat4 M;                     // world-to-window transform
+  float currentTime;          // current game time
+  float timeOfIncomingFlight; // time taken for incoming missile to reach bottom
+  float lastMissile = 0;
+  int rate = 4;
+  int count = 0;
 
   seq<Silo> silos;
   seq<City> cities;
@@ -48,6 +48,5 @@ class State {
   seq<Missile> missilesOut;
   seq<Circle> explosions;
 };
-
 
 #endif

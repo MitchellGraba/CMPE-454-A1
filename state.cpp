@@ -52,9 +52,23 @@ void State::updateState(float deltaT)
   // should increase with time.
   //
   // CHANGE THIS
+  bool newMissile = false;
 
-  if (randIn01() > 0.99)
+  if ((currentTime - lastMissile) > rate)
+  {
+    newMissile = true;
+    count++;
+  }
+
+  if (count > 7)
+  {
+    rate++;
+  }
+
+  if (newMissile)
   { // New missile
+
+    lastMissile = currentTime;
 
     float randXsrc = randIn01();
     std::cout << "SOURCE X: " << randXsrc << std::endl;
@@ -63,14 +77,14 @@ void State::updateState(float deltaT)
     //This so for any randomly generated x component of missile vector a Y component can be generated
     // such that the resulting vector will terminate within the screen dimensions on the line y = 0
 
-    float yGenBound1 = worldTop / (randXsrc); //slope of line from src to 0,0
+    float yGenBound1 = worldTop / (randXsrc);      //slope of line from src to 0,0
     float yGenBound2 = -worldTop / (1 - randXsrc); // slope of line from src to 0,1
 
-    float randXvec = randIn01(); 
+    float randXvec = randIn01();
     float randYvec = 0;
 
     if (randXvec < randXsrc)
-    { 
+    {
       // if x component of vector is left of source X coord
       randYvec = yGenBound1 * randXvec * randIn01();
     }
@@ -86,7 +100,6 @@ void State::updateState(float deltaT)
     }
     std::cout << "x: " << randXvec;
     std::cout << " y: " << randYvec << std::endl;
-    
 
     missilesIn.add(Missile(vec3(randXsrc, worldTop, 0),                                         // source
                            0.4 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
