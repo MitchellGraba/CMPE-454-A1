@@ -64,9 +64,9 @@ void mouseButtonCallback( GLFWwindow* window, int button, int action, int mods )
     // Calculate the world coordinates of mouse (x,y)
 
     float wx = x / WINDOW_WIDTH;
-    //(WORLD_RIGHT - WORLD_LEFT)/2.0; // (wrong)
+   
     float wy =  ((WORLD_RIGHT - WORLD_LEFT) / (float) WINDOW_WIDTH * WINDOW_HEIGHT + WORLD_BOTTOM) * (WINDOW_HEIGHT - y) / WINDOW_HEIGHT;
-    //((WORLD_RIGHT - WORLD_LEFT) / (float) WINDOW_WIDTH * WINDOW_HEIGHT + WORLD_BOTTOM) / 2.0;
+    
     std:: cout << "x" << x << "y" << y << endl;
     // Shoot from silo 0, 1, or 2
 
