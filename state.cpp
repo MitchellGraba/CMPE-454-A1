@@ -123,7 +123,7 @@ void State::fireMissile( int siloIndex, float x, float y )
     // CHANGE THIS
 
     missilesOut.add( Missile( silos[siloIndex].position(),           // source
-			      speed * vec3(x - silos[siloIndex].position().x, y - silos[siloIndex].position().y, 0), // velocity
+			      speed * vec3(x - silos[siloIndex].position().x, y - silos[siloIndex].position().y, 0).normalize(), // velocity
 			      y,		                     // destination y
 			      vec3( 0,1,1 ) ) );                     // colour
   }

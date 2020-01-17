@@ -51,7 +51,10 @@ class Missile {
   // Has the missile reached its destination?
 
   bool hasReachedDestination() {
-    return false;
+
+    
+
+    return pos1.x > 1 || pos1.y > 0.68 || pos1.x < 0 || pos1.y < 0;
   }
 
  private:
