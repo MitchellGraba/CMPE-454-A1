@@ -50,8 +50,7 @@ void State::updateState(float deltaT)
 
   // Generate some new missiles.  The rate of missile generation
   // should increase with time.
-  //
-  // CHANGE THIS
+  
   bool newMissile = false;
 
   if ((currentTime - lastMissile) > rate)
@@ -60,9 +59,10 @@ void State::updateState(float deltaT)
     count++;
   }
 
-  if (count > 7)
+  if (count > 10 && rate > 1)
   {
-    rate++;
+    rate--;
+    count = 0;
   }
 
   if (newMissile)
