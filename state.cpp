@@ -119,7 +119,9 @@ void State::updateState(float deltaT)
     {
       // CHANGE THIS: ADD AN EXPLOSION
 
-      //explosions.add(new Circle(vec3 p, float s, float maxRad, vec3 c));
+     
+      explosions.add(Circle(vec3(missilesIn[i].position().x, missilesIn[i].position().y, 0),1.0, 0.05,  vec3(1.0,1.0,0.0)));
+     
       missilesIn.remove(i);
       i--;
     }
@@ -128,6 +130,7 @@ void State::updateState(float deltaT)
     if (missilesOut[i].hasReachedDestination())
     {
       // CHANGE THIS: ADD AN EXPLOSION
+    
       missilesOut.remove(i);
       i--;
     }
