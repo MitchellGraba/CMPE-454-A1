@@ -52,9 +52,17 @@ class Missile {
 
   bool hasReachedDestination() {
 
-    
+    return hasHitBoundary();
+  }
 
-    return pos1.x > 1 || pos1.y > 0.68 || pos1.x < 0 || pos1.y < 0;
+  bool hasHitBoundary(){
+
+    return pos1.x > 1 || pos1.y > 0.68 || pos1.x < 0 || pos1.y < 0; 
+  }
+
+  bool hasHitBuilding(){
+
+    return true;
   }
 
  private:
