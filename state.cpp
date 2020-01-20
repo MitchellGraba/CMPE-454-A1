@@ -130,7 +130,10 @@ void State::updateState(float deltaT)
     if (missilesOut[i].hasReachedDestination())
     {
       // CHANGE THIS: ADD AN EXPLOSION
-    
+
+      
+      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0),1.0, 0.05,  vec3(0,1.0,1.0)));
+
       missilesOut.remove(i);
       i--;
     }
@@ -179,7 +182,8 @@ void State::fireMissile(int siloIndex, float x, float y)
     missilesOut.add(Missile(silos[siloIndex].position(),                                                                       // source
                             speed * vec3(x - silos[siloIndex].position().x, y - silos[siloIndex].position().y, 0).normalize(), // velocity
                             y,                                                                                                 // destination y
-                            vec3(0, 1, 1)));                                                                                   // colour
+                            vec3(0, 1, 1))); 
+    std:: cout << "dest: " << y << std::endl;                                                                                  // colour
   }
 }
 
