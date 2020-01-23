@@ -76,7 +76,7 @@ void State::updateState(float deltaT)
     lastMissile = currentTime;
 
     float randXsrc = randIn01();
-    std::cout << "SOURCE X: " << randXsrc << std::endl;
+    //std::cout << "SOURCE X: " << randXsrc << std::endl;
 
     //the following calculates slopes of lines from (random X source, worldTop) to (0, 0) and (0, 1)
     //This so for any randomly generated x component of missile vector a Y component can be generated
@@ -103,11 +103,11 @@ void State::updateState(float deltaT)
       //if it is the same as the source x coord
       randYvec = worldTop * randIn01();
     }
-    std::cout << "x: " << randXvec;
-    std::cout << " y: " << randYvec << std::endl;
+    //std::cout << "x: " << randXvec;
+    //std::cout << " y: " << randYvec << std::endl;
 
     missilesIn.add(Missile(vec3(randXsrc, worldTop, 0),                                         // source
-                           0.3 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
+                           0.15 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
                            0,                                                                   // destination y
                            vec3(1, 1, 0)));                                                     // colour
   }
@@ -132,7 +132,7 @@ void State::updateState(float deltaT)
       // CHANGE THIS: ADD AN EXPLOSION
 
       
-      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0),1.0, 0.05,  vec3(0,1.0,1.0)));
+      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0),0.5, 0.07,  vec3(0,1.0,1.0)));
 
       missilesOut.remove(i);
       i--;
@@ -144,6 +144,8 @@ void State::updateState(float deltaT)
     if (explosions[i].radius() >= explosions[i].maxRadius())
     {
       // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
+     
+      
       explosions.remove(i);
       i--;
     }
@@ -152,6 +154,20 @@ void State::updateState(float deltaT)
   // destroyed
 
   // ADD CODE HERE
+
+   for (i = 0; i < explosions.size(); i++){
+    if (explosions[i].radius() <= explosions[i].maxRadius())
+    {
+      for(int j = 0; j < missilesIn.size(); j++ ){
+          if(sqrt((missilesIn[j].position() - explosions[i].position()).squaredLength()) < explosions[i].radius()){
+            std:: cout << "destroyed missile" << std::endl;
+            missilesIn.remove(j);
+          }
+      }
+     
+      
+    }
+   }
 
   // Update all the moving objects
 
