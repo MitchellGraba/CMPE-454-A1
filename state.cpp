@@ -106,10 +106,10 @@ void State::updateState(float deltaT)
     //std::cout << "x: " << randXvec;
     //std::cout << " y: " << randYvec << std::endl;
 
-    missilesIn.add(Missile(vec3(randXsrc, worldTop, 0),                                         // source
+    missilesIn.add(Missile(vec3(randXsrc, worldTop, 0),                                          // source
                            0.15 * vec3(randXvec - randXsrc, randYvec - worldTop, 0).normalize(), // velocity
-                           0,                                                                   // destination y
-                           vec3(1, 1, 0)));                                                     // colour
+                           0,                                                                    // destination y
+                           vec3(1, 1, 0)));                                                      // colour
   }
 
   // Look for terminating missiles
@@ -119,9 +119,8 @@ void State::updateState(float deltaT)
     {
       // CHANGE THIS: ADD AN EXPLOSION
 
-     
-      explosions.add(Circle(vec3(missilesIn[i].position().x, missilesIn[i].position().y, 0),1.0, 0.05,  vec3(1.0,1.0,0.0)));
-     
+      explosions.add(Circle(vec3(missilesIn[i].position().x, missilesIn[i].position().y, 0), 1.0, 0.05, vec3(1.0, 1.0, 0.0)));
+
       missilesIn.remove(i);
       i--;
     }
@@ -131,8 +130,7 @@ void State::updateState(float deltaT)
     {
       // CHANGE THIS: ADD AN EXPLOSION
 
-      
-      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0),0.5, 0.07,  vec3(0,1.0,1.0)));
+      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0), 0.5, 0.07, vec3(0, 1.0, 1.0)));
 
       missilesOut.remove(i);
       i--;
@@ -144,8 +142,7 @@ void State::updateState(float deltaT)
     if (explosions[i].radius() >= explosions[i].maxRadius())
     {
       // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
-     
-      
+
       explosions.remove(i);
       i--;
     }
@@ -155,19 +152,20 @@ void State::updateState(float deltaT)
 
   // ADD CODE HERE
 
-   for (i = 0; i < explosions.size(); i++){
+  for (i = 0; i < explosions.size(); i++)
+  {
     if (explosions[i].radius() <= explosions[i].maxRadius())
     {
-      for(int j = 0; j < missilesIn.size(); j++ ){
-          if(sqrt((missilesIn[j].position() - explosions[i].position()).squaredLength()) < explosions[i].radius()){
-            std:: cout << "destroyed missile" << std::endl;
-            missilesIn.remove(j);
-          }
+      for (int j = 0; j < missilesIn.size(); j++)
+      {
+        if (sqrt((missilesIn[j].position() - explosions[i].position()).squaredLength()) < explosions[i].radius())
+        {
+          std::cout << "destroyed missile" << std::endl;
+          missilesIn.remove(j);
+        }
       }
-     
-      
     }
-   }
+  }
 
   // Update all the moving objects
 
@@ -198,8 +196,8 @@ void State::fireMissile(int siloIndex, float x, float y)
     missilesOut.add(Missile(silos[siloIndex].position(),                                                                       // source
                             speed * vec3(x - silos[siloIndex].position().x, y - silos[siloIndex].position().y, 0).normalize(), // velocity
                             y,                                                                                                 // destination y
-                            vec3(0, 1, 1))); 
-    std:: cout << "dest: " << y << std::endl;                                                                                  // colour
+                            vec3(0, 1, 1)));
+    std::cout << "dest: " << y << std::endl; // colour
   }
 }
 
