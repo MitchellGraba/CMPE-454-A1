@@ -56,12 +56,9 @@ class Missile {
   }
 
   bool hasHitYdest(){
-   
-    if((pos1 - pos0).y > abs(destY - pos0.y))
-      return true;
-        
 
-    return false;
+    return ((pos1 - pos0).y > abs(destY - pos0.y)) ? true : false; 
+   
   }
 
   bool hasHitBoundary(){

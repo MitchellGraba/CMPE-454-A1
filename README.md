@@ -9,9 +9,9 @@ part 3 [DONE]
 
 part 4
 a [DONE]
-b
-c
-d
+b [DONE]
+c   s
+d [DONE]
 
 part 5
 novel feature 1
