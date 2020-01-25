@@ -21,6 +21,11 @@ class Building {
     pos = p;
   }
 
+
+  vec3 position() {
+	  return pos;
+  }
+
   // Draw the building
 
   virtual void draw( GPUProgram *gpuProgram ) = 0;
