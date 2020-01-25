@@ -19,6 +19,8 @@ class City : public Building {
 
   City( vec3 pos ) : Building( pos ) {}
 
+  
+
   // Draw the city
 
   void draw( GPUProgram *gpuProgram ) {
@@ -34,6 +36,8 @@ class City : public Building {
   }
 
   bool isHit( vec3 missilePos, float radius ); 
+
+
 };
   
 

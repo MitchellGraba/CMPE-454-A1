@@ -8,6 +8,7 @@
 
 #include <sys/timeb.h> // includes ftime (to return current time)
 
+<<<<<<< HEAD
 //#ifdef LINUX
 #include <unistd.h> // includes usleep (to sleep for some time)
 #include <values.h> // includes MAX_FLOAT
@@ -15,6 +16,15 @@
 #define _strdup strdup
 #define sscanf_s sscanf
 //#endif
+=======
+#ifdef LINUX
+  #include <unistd.h>		// includes usleep (to sleep for some time)
+  #include <values.h>           // includes MAX_FLOAT
+  #define sprintf_s sprintf
+  #define _strdup strdup
+  #define sscanf_s sscanf
+#endif
+>>>>>>> master
 
 #ifdef _WIN32
 //#include <typeinfo>

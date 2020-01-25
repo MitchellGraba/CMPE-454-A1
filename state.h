@@ -44,9 +44,12 @@ private:
 
   seq<Silo> silos;
   seq<City> cities;
+  bool *cityState;
   seq<Missile> missilesIn;
   seq<Missile> missilesOut;
   seq<Circle> explosions;
+
+
 };
 
 #endif

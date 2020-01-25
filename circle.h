@@ -64,6 +64,15 @@ class Circle {
     return pos;
   }
 
+  bool hasHitCity() {
+
+	  return (pos.x >= 0.16 && pos.x <= 0.24 || pos.x >= 0.26 && pos.x <= 0.34 ||
+		  pos.x >= 0.36 && pos.x <= 0.44 || pos.x >= 0.56 && pos.x <= 0.64 ||
+		  pos.x >= 0.66 && pos.x <= 0.74 || pos.x >= 0.76 && pos.x <= 0.84) && (pos.y <= 0.03);
+  }
+
+ 
+
  private:
 
   GLuint VAO;
