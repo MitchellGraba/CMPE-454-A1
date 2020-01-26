@@ -115,37 +115,21 @@ void State::updateState(float deltaT)
   // Look for terminating missiles
 
   for (i = 0; i < missilesIn.size(); i++)
-    if (missilesIn[i].hasReachedDestination())
+    if (missilesIn[i].hasReachedDestination(cityState))
     {
-<<<<<<< HEAD
-      // CHANGE THIS: ADD AN EXPLOSION
 
       explosions.add(Circle(vec3(missilesIn[i].position().x, missilesIn[i].position().y, 0), 1.0, 0.05, vec3(1.0, 1.0, 0.0)));
 
-=======
-      //========================================================================================
-		
- //==========================================================================================    
-      explosions.add(Circle(vec3(missilesIn[i].position().x, missilesIn[i].position().y, 0),1.0, 0.05,  vec3(1.0,1.0,0.0)));
-     
->>>>>>> master
       missilesIn.remove(i);
       i--;
     }
 
   for (i = 0; i < missilesOut.size(); i++)
-    if (missilesOut[i].hasReachedDestination())
+    if (missilesOut[i].hasReachedDestination(cityState))
     {
       // CHANGE THIS: ADD AN EXPLOSION
-<<<<<<< HEAD
 
       explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0), 0.5, 0.07, vec3(0, 1.0, 1.0)));
-=======
-	
-		
-      
-      explosions.add(Circle(vec3(missilesOut[i].position().x, missilesOut[i].position().y, 0),0.5, 0.07,  vec3(0,1.0,1.0)));
->>>>>>> master
 
       missilesOut.remove(i);
       i--;
@@ -153,46 +137,38 @@ void State::updateState(float deltaT)
 
   // Look for terminating explosions
 
-<<<<<<< HEAD
   for (i = 0; i < explosions.size(); i++)
+  {
+
     if (explosions[i].radius() >= explosions[i].maxRadius())
     {
       // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
+      if (explosions[i].hasHitCity())
+      {
+
+        int closestCity = 0;
+        float d = 100.0;
+        for (int j = 0; j < cities.size(); j++)
+        {
+
+          if ((abs(explosions[i].position().x - cities[j].position().x) < d))
+          {
+            closestCity = j;
+            d = abs(explosions[i].position().x - cities[j].position().x);
+          }
+        }
+        //cityState[closestCity] = true;
+        if (d <= 0.04){
+         cityState[closestCity] = true;
+         cities[closestCity] = City(vec3(-2.0,0.0,0.0));
+        // cities.remove(closestCity);
+        }
+        
+      }
 
       explosions.remove(i);
       i--;
     }
-=======
-  for (i = 0; i < explosions.size(); i++) {
->>>>>>> master
-
-	  if (explosions[i].radius() >= explosions[i].maxRadius())
-	  {
-		  // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
-		  if (explosions[i].hasHitCity()) {
-
-			  int closestCity = 0;
-			  float d = 100.0;
-			  for (int j = 1; j < cities.size(); j++) {
-
-				  
-				  if ((abs(explosions[i].position().x - cities[j].position().x) < d)) {
-					  closestCity = j;
-					  d = abs(explosions[i].position().x - cities[j].position().x);
-				 }
-
-				  //stuff
-
-			  }
-			  //cityState[closestCity] = true;
-			  if( d <= 0.04)
-			  cities.remove(closestCity);
-
-		  }
-
-		  explosions.remove(i);
-		  i--;
-	  }
   }
   // Look for incoming missiles that hit an explosion and are
   // destroyed
@@ -289,10 +265,10 @@ void State::setupWorld()
   cities.add(City(vec3(0.8, 0, 0)));
 
   cityState = new bool[cities.size()];
-  
-  for (int i = 0; i < cities.size(); i++) {
-	  cityState[i] = false;
+
+  for (int i = 0; i < cities.size(); i++)
+  {
+    cityState[i] = false;
   }
   // AND cityState with each city region to check if it has been hit or not
-
 }

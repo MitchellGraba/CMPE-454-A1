@@ -71,6 +71,18 @@ class Circle {
 		  pos.x >= 0.66 && pos.x <= 0.74 || pos.x >= 0.76 && pos.x <= 0.84) && (pos.y <= 0.03);
   }
 
+   bool hasHitCity(int i)
+  {
+
+    if (i > 2)
+    {
+
+      return pos.x >= (((float)i / 10.0) + 0.3 - 0.04) && pos.x <= (((float)i / 10.0) + 0.3 + 0.04) && pos.y <= 0.03;
+    }
+
+    return pos.x >= (((float)i / 10.0) + 0.2 - 0.04) && pos.x <= (((float)i / 10.0) + 0.2 + 0.04) && pos.y <= 0.03;
+  }
+
  
 
  private:
