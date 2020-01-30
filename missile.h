@@ -37,7 +37,7 @@ public:
         
     vec3 vertsA[2] = {
         vec3(posT.x, posT.y, 0),
-        vec3(posA.x, posA.y, 0)};
+        vec3(posA.x, posA.y, 0)};    
         
     vec3 vertsB[2] = {
         vec3(posT.x, posT.y, 0),
@@ -48,9 +48,9 @@ public:
         vec3(posC.x, posC.y, 0)};    
             
     gpuProgram->drawVertices(&verts[0], 2, GL_LINES, colour);
-    gpuProgram->drawVertices(&vertsA[0], 2, GL_LINES, vec3(colour.x - 0.33,colour.y-0.33, colour.z));
-    gpuProgram->drawVertices(&vertsB[0], 2, GL_LINES, vec3(colour.x-0.66,colour.y-0.66, colour.z));
-     gpuProgram->drawVertices(&vertsC[0], 2, GL_LINES, vec3(colour.x-0.85,colour.y-0.85, colour.z));
+    gpuProgram->drawVertices(&vertsA[0], 2, GL_LINES, vec3(colour.x - 0.33,colour.y-0.33, colour.z-0.33));
+    gpuProgram->drawVertices(&vertsB[0], 2, GL_LINES, vec3(colour.x-0.66,colour.y-0.66, colour.z-0.66));
+     gpuProgram->drawVertices(&vertsC[0], 2, GL_LINES, vec3(colour.x-0.8,colour.y-0.8, colour.z-0.8));
     
   }
 
