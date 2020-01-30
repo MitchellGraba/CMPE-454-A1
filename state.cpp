@@ -241,8 +241,9 @@ void State::fireMissile(int siloIndex, float x, float y)
     silos[siloIndex].decrMissiles();
 
     // CHANGE THIS
-
-    missilesOut.add(Missile(silos[siloIndex].position(),                                                                       // source
+    vec3 pos = silos[siloIndex].position();
+    pos.y += 0.04; 
+    missilesOut.add(Missile(pos,                                                                       // source
                             speed * vec3(x - silos[siloIndex].position().x, y - silos[siloIndex].position().y, 0).normalize(), // velocity
                             y,                                                                                                 // destination y
                             vec3(0, 1, 1)));

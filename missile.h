@@ -16,6 +16,7 @@ public:
   Missile(vec3 p, vec3 v, float y, vec3 c)
   {
     pos0 = p;
+    posT = p;
     pos1 = p;
     velocity = v;
     colour = c;
@@ -28,7 +29,7 @@ public:
   {
 
     vec3 verts[2] = {
-        vec3(pos0.x, pos0.y, 0),
+        vec3(posT.x, posT.y, 0),
         vec3(pos1.x, pos1.y, 0)};
 
     gpuProgram->drawVertices(&verts[0], 2, GL_LINES, colour);
@@ -39,6 +40,10 @@ public:
   void move(float deltaT)
   {
     pos1 = pos1 + deltaT * velocity;
+
+    if(sqrt((pos1 - pos0).squaredLength()) > 0.2){
+      posT = posT + deltaT * velocity;
+    }
   }
 
   // Return the current position
@@ -158,6 +163,7 @@ public:
 
 private:
   vec3 pos0;     // start position
+  vec3 posT;     // trailing position
   vec3 pos1;     // current position
   vec3 velocity; // velocity
   vec3 colour;   // colour of missile trail
