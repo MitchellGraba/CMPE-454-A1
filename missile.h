@@ -53,7 +53,9 @@ public:
   bool hasReachedDestination(bool *state)
   {
 
-    return hasHitBoundary() || hasHitYdest() || hasHitCity0(state) || hasHitCity1(state) || hasHitCity2(state) || hasHitCity3(state) || hasHitCity4(state) || hasHitCity5(state);
+    return hasHitBoundary() || hasHitYdest() || hasHitCity0(state) || hasHitCity1(state) || 
+    hasHitCity2(state) || hasHitCity3(state) || hasHitCity4(state) || hasHitCity5(state) || 
+    hasHitSilo();
   }
 
   bool hasHitYdest()
@@ -65,6 +67,11 @@ public:
   {
 
     return pos1.x > 1 || pos1.y > 0.68 || pos1.x < 0 || pos1.y < 0;
+  }
+
+   bool hasHitSilo(){
+      return ((pos1.x >= 0.06 && pos1.x <= 0.14) || (pos1.x >= 0.46 && pos1.x <= 0.54) ||
+		  (pos1.x >= 0.86 && pos1.x <= 0.94)) && (pos1.y <= 0.01);
   }
 
   bool hasHitCity0(bool state[])

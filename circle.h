@@ -22,6 +22,7 @@ class Circle {
     maxR = maxRad;
     speed = s;
     colour = c;
+    hitMaxRad = false;
   }
 
   // Draw the circle
@@ -50,6 +51,26 @@ class Circle {
     r = r + deltaT * speed;
   }
 
+  void contract(float deltaT){
+    r = r - deltaT * speed;
+  }
+
+  void behaviour(float deltaT){
+    if(radius() > maxRadius()){
+      hitMaxRad = true;
+    } 
+    
+    if (hitMaxRad)
+    {
+     return contract(deltaT);
+    } 
+    else
+    {
+      return expand(deltaT);
+    }
+
+  }
+
   // Return the current and max radii
 
   float radius() {
@@ -71,7 +92,7 @@ class Circle {
 		  pos.x >= 0.66 && pos.x <= 0.74 || pos.x >= 0.76 && pos.x <= 0.84) && (pos.y <= 0.03);
   }
 
-   bool hasHitCity(int i)
+ /*  bool hasHitCity(int i)
   {
 
     if (i > 2)
@@ -81,6 +102,12 @@ class Circle {
     }
 
     return pos.x >= (((float)i / 10.0) + 0.2 - 0.04) && pos.x <= (((float)i / 10.0) + 0.2 + 0.04) && pos.y <= 0.03;
+  }
+  */
+
+  bool hasHitSilo(){
+      return (pos.x >= 0.06 && pos.x <= 0.14) || (pos.x >= 0.46 && pos.x <= 0.54) ||
+		  (pos.x >= 0.86 && pos.x <= 0.94) && (pos.y <= 0.01);
   }
 
  
@@ -94,6 +121,7 @@ class Circle {
   float maxR;			// maximum radius
   float speed;			// speed at which radius increases
   vec3  colour;		// colour of circle
+  bool hitMaxRad;
 };
 
 
