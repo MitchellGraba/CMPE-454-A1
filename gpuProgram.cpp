@@ -132,7 +132,6 @@ void GPUProgram::drawVertices(vec3 *verts, int n, GLenum drawType, vec3 colour)
   // Set colour
 
   glUniform3fv(glGetUniformLocation(id(), "colour"), 1, &colour[0]);
-
   // Render it
 
   glDrawArrays(drawType, 0, n);

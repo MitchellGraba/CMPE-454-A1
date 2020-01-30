@@ -17,6 +17,9 @@ public:
   {
     pos0 = p;
     posT = p;
+    posA = p;
+    posB = p;
+    posC = p;
     pos1 = p;
     velocity = v;
     colour = c;
@@ -27,12 +30,28 @@ public:
 
   void draw(GPUProgram *gpuProgram)
   {
-
+   
     vec3 verts[2] = {
         vec3(posT.x, posT.y, 0),
         vec3(pos1.x, pos1.y, 0)};
-
+        
+    vec3 vertsA[2] = {
+        vec3(posT.x, posT.y, 0),
+        vec3(posA.x, posA.y, 0)};
+        
+    vec3 vertsB[2] = {
+        vec3(posT.x, posT.y, 0),
+        vec3(posB.x, posB.y, 0)};
+        
+     vec3 vertsC[2] = {
+        vec3(posT.x, posT.y, 0),
+        vec3(posC.x, posC.y, 0)};    
+            
     gpuProgram->drawVertices(&verts[0], 2, GL_LINES, colour);
+    gpuProgram->drawVertices(&vertsA[0], 2, GL_LINES, vec3(colour.x - 0.33,colour.y-0.33, colour.z));
+    gpuProgram->drawVertices(&vertsB[0], 2, GL_LINES, vec3(colour.x-0.66,colour.y-0.66, colour.z));
+     gpuProgram->drawVertices(&vertsC[0], 2, GL_LINES, vec3(colour.x-0.85,colour.y-0.85, colour.z));
+    
   }
 
   // Move the missile over a time interval, deltaT
@@ -41,9 +60,21 @@ public:
   {
     pos1 = pos1 + deltaT * velocity;
 
-    if(sqrt((pos1 - pos0).squaredLength()) > 0.2){
+    if(sqrt((pos1 - pos0).squaredLength()) > 0.0666){
+      posA = posA + deltaT * velocity;
+    }
+    if(sqrt((pos1 - pos0).squaredLength()) > 0.1333){
+      posB = posB + deltaT * velocity;
+    }
+
+    if(sqrt((pos1 - pos0).squaredLength()) > 0.1333){
+      posC = posC + deltaT * velocity;
+    }
+
+     if(sqrt((pos1 - pos0).squaredLength()) > 0.2){
       posT = posT + deltaT * velocity;
     }
+
   }
 
   // Return the current position
@@ -164,6 +195,9 @@ public:
 private:
   vec3 pos0;     // start position
   vec3 posT;     // trailing position
+  vec3 posA;
+  vec3 posB;
+  vec3 posC;
   vec3 pos1;     // current position
   vec3 velocity; // velocity
   vec3 colour;   // colour of missile trail
