@@ -42,6 +42,18 @@ void State::draw()
 void State::updateState(float deltaT)
 
 {
+   bool citiesLeft = cityState[0];
+  for (int i = 1; i < cities.size(); i++){
+    citiesLeft &= cityState[i];
+  }
+
+  if((siloState[0]  == true && siloState[1] == true && siloState[2] == true) || citiesLeft){
+    exit(0);
+  }
+
+ 
+  
+
   int i;
 
   // Update the time
