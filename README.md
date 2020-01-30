@@ -1,6 +1,10 @@
 # A1
 CMPE 454 assignment 1
 
+Mitchell Graba 20056482
+
+Josh O'Connor 
+
 part 1 [DONE]
 
 part 2 [PARTIALLY]
